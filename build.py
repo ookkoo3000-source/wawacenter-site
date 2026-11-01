@@ -10,6 +10,8 @@ PHONE = "010-3131-5305"
 PHONE_TEL = "+821031315305"
 EMAIL = "ookkoo12@naver.com"
 CHANNEL_KEY = "5eae38ee-ad6b-4ab2-ba9c-721702cc1ca4"   # 채널톡 플러그인 키 (실시간 상담)
+GOOGLE_VERIFY = "lP-1pQd7AGs4XPVGMoEobJ4YuuJcQJ-7oEpnq_Jx-iQ"   # 구글 서치콘솔 (계정 공통 토큰)
+NAVER_VERIFY = "a091e68022acc10aecbaff1cc7cdbd000b2e7583"   # 네이버 서치어드바이저: 사이트 등록 후 받은 content 값 입력 (사이트마다 다름)
 TODAY = datetime.date.today().isoformat()
 ASSET_V = datetime.datetime.now().strftime("%Y%m%d%H%M")   # 캐시 무효화용 버전 (빌드 시각)
 OUT = os.path.dirname(os.path.abspath(__file__))
@@ -36,6 +38,11 @@ def head(title, desc, path, keywords, noindex=False, extra_ld="", og="og.jpg"):
         "description": "초·중·고 자기주도학습 코칭 전문 브랜드 와와학습코칭센터의 수강 상담과 학습 진단 신청을 안내하는 파트너 페이지",
         "parentOrganization": {"@type": "Organization", "name": "(주)동화세상에듀코 와와학습코칭센터", "url": "https://www.wawacenter.com/"},
         "areaServed": "KR"}, ensure_ascii=False)
+    verify_tags = ""
+    if GOOGLE_VERIFY:
+        verify_tags += f'<meta name="google-site-verification" content="{GOOGLE_VERIFY}">\n'
+    if NAVER_VERIFY:
+        verify_tags += f'<meta name="naver-site-verification" content="{NAVER_VERIFY}">\n'
     return f"""<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -54,6 +61,7 @@ def head(title, desc, path, keywords, noindex=False, extra_ld="", og="og.jpg"):
 <meta property="og:image" content="{SITE_URL}/assets/img/{og}">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
+{verify_tags}
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192x192.png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
