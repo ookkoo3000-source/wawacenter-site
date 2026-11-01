@@ -8,3 +8,4 @@
 관평점	동화초	영어	2026-11-01	2026-11-01-donghwacho-yeongeo.md
 강릉교동점	해람중	내신	2026-11-01	2026-11-01-haeramjung-naesin.md
 별내중앙점 (모두오름)	한별초	수학	2026-11-01	2026-11-01-hanbyeolcho-suhak.md
+마포점	숭문중	영어	2026-11-01	2026-11-01-sungmunjung-yeongeo.md

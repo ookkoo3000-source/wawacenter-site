@@ -879,6 +879,29 @@ def render_post(p, all_posts):
         "image": f"{SITE_URL}/assets/img/{p['cover']}", "mainEntityOfPage": url,
         "author": {"@type": "Organization", "name": SITE_NAME},
         "publisher": {"@type": "Organization", "name": SITE_NAME, "url": SITE_URL + "/"}}, ensure_ascii=False)
+    # FAQ 구조화 데이터 (본문의 <h3>Q. 질문</h3><p>답</p> 패턴)
+    faqs = re.findall(r"<h3[^>]*>\s*Q\.?\s*(.*?)</h3>\s*<p>(.*?)</p>", p["body"], re.S)         or re.findall(r"<p><strong>\s*Q\.?\s*(.*?)</strong>\s*(.*?)</p>", p["body"], re.S)
+    faq_ld_html = ""
+    if faqs:
+        strip = lambda s: re.sub(r"<[^>]+>", "", s).strip()
+        faq_ld_html = '<script type="application/ld+json">' + json.dumps({
+            "@context": "https://schema.org", "@type": "FAQPage",
+            "mainEntity": [{"@type": "Question", "name": strip(q), "acceptedAnswer": {"@type": "Answer", "text": strip(a)}} for q, a in faqs]
+        }, ensure_ascii=False) + "</script>"
+    # 지점 정보 박스 (frontmatter center: 지점명 → assets/centers.json)
+    center_box = ""
+    if p.get("center"):
+        cj = json.load(io.open(os.path.join(OUT, "assets", "centers.json"), encoding="utf-8"))
+        c = next((x for x in cj if x["name"] == p["center"]), None)
+        if c:
+            subj = " · ".join(f"{k} {v}" for k, v in (c.get("subjects") or {}).items())
+            rows = [("지점", f"와와학습코칭센터 {c['name']}"), ("주소", c["address"] + (f"<br><span class=\"note\">{c['note']}</span>" if c.get("note") else "")),
+                    ("담당 학교", ", ".join(c.get("schools", []))), ("운영 과목·학년", subj or "상담 시 안내"),
+                    ("수업 시간", (c.get("hours") or "상담 시 안내") + (f" / 주말: {c['weekend']}" if c.get("weekend") else "")),
+                    ("등록", (c.get("reg") or "") + (f" · {c['director']} 원장" if c.get("director") else ""))]
+            center_box = '<div class="center-box"><h3>📍 ' + f"{c['name']} 한눈에 보기" + '</h3><table>' + "".join(
+                f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in rows if v) + \
+                f'</table><p class="note">운영 과목·시간은 센터 사정에 따라 바뀔 수 있어 상담 시 확인해 드립니다. <a href="centers.html?q={c["name"].split("(")[0]}">센터 찾기에서 보기</a> · <a href="apply.html?center={c["name"]}">이 센터 상담 신청</a></p></div>'
     related = [q for q in all_posts if q["slug"] != p["slug"]][:3]
     rel = ""
     if related:
@@ -895,6 +918,7 @@ def render_post(p, all_posts):
     <article class="prose">
       <img class="post-cover" src="assets/img/{p['cover']}" alt="{p['title']}" loading="lazy">
       {p['body']}
+      {center_box}
       <div class="post-cta">
         <h3>우리 아이에게 맞는 방법인지 확인하고 싶다면</h3>
         <p>학년·학교·현재 상황을 알려주시면 가까운 와와학습코칭센터 기준으로 진단 일정과 진행 방식을 안내해 드립니다. 상담과 진단은 무료이고 등록을 권유하지 않습니다.</p>
@@ -912,7 +936,7 @@ def render_post(p, all_posts):
 {cta_band()}
 """
     return head(p["title"] + " | 와와학습코칭센터 학습 칼럼", p["description"], p["file"], p["keywords"],
-                extra_ld=f'<script type="application/ld+json">{ld}</script>', og=p["cover"]) \
+                extra_ld=f'<script type="application/ld+json">{ld}</script>' + faq_ld_html, og=p["cover"]) \
         + chrome_top("blog.html") + body + chrome_bottom()
 
 def render_blog_index(posts):
