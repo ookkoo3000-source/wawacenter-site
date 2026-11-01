@@ -11,6 +11,7 @@ PHONE_TEL = "+821031315305"
 EMAIL = "ookkoo12@naver.com"
 CHANNEL_KEY = "5eae38ee-ad6b-4ab2-ba9c-721702cc1ca4"   # 채널톡 플러그인 키 (실시간 상담)
 TODAY = datetime.date.today().isoformat()
+ASSET_V = datetime.datetime.now().strftime("%Y%m%d%H%M")   # 캐시 무효화용 버전 (빌드 시각)
 OUT = os.path.dirname(os.path.abspath(__file__))
 
 NAV = [
@@ -58,7 +59,7 @@ def head(title, desc, path, keywords, noindex=False, extra_ld="", og="og.jpg"):
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v={ASSET_V}">
 <script type="application/ld+json">{org_ld}</script>
 {extra_ld}
 </head>
@@ -142,7 +143,7 @@ def chrome_bottom():
   ChannelIO('boot', {{ "pluginKey": "{CHANNEL_KEY}", "hideChannelButtonOnBoot": true }});
   document.getElementById('chCta').addEventListener('click', function(){{ ChannelIO('showMessenger'); }});
 </script>
-<script src="assets/site.js" defer></script>
+<script src="assets/site.js?v={ASSET_V}" defer></script>
 </body>
 </html>"""
 
@@ -702,7 +703,7 @@ pages["centers.html"] = dict(
   </div>
 </div></section>
 {cta_band("가까운 센터가 안 보이시나요?", "지역과 학년만 남겨 주시면 가까운 센터와 운영 과목·시간표를 확인해 안내해 드립니다.")}
-<script src="assets/centers.js" defer></script>
+<script src="assets/centers.js?v={ASSET_V}" defer></script>
 """)
 
 pages["reviews.html"] = dict(
