@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /apply.html
+Sitemap: https://wawacenter.co.kr/sitemap.xml
