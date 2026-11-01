@@ -972,7 +972,7 @@ def render_rss(posts):
     <title>{p['title'].replace('&', '&amp;')}</title>
     <link>{SITE_URL}/{p['file']}</link>
     <guid>{SITE_URL}/{p['file']}</guid>
-    <pubDate>{email.utils.formatdate(t)}</pubDate>
+    <pubDate>{email.utils.formatdate(t + 9*3600, localtime=True)}</pubDate>
     <description>{p['description'].replace('&', '&amp;')}</description>
   </item>""")
     return f"""<?xml version="1.0" encoding="UTF-8"?>
