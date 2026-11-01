@@ -1,0 +1,9 @@
+첨단점	월봉초	수학	2026-11-01	2026-11-01-wolbongcho-suhak.md
+논현점	논현초	영어	2026-11-01	2026-11-01-nonhyeoncho-yeongeo.md
+상동점	중원중	내신	2026-11-01	2026-11-01-jungwonjung-naesin.md
+배곧점	배곧라라초	수학	2026-11-01	2026-11-01-baegotraracho-suhak.md
+마포2호점	서강초	영어	2026-11-01	2026-11-01-seogangcho-yeongeo.md
+반월당점	대구고	내신	2026-11-01	2026-11-01-daegugo-naesin.md
+신중동점	계남초	수학	2026-11-01	2026-11-01-gyenamcho-suhak.md
+관평점	동화초	영어	2026-11-01	2026-11-01-donghwacho-yeongeo.md
+강릉교동점	해람중	내신	2026-11-01	2026-11-01-haeramjung-naesin.md
