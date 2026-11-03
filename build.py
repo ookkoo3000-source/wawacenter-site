@@ -865,6 +865,7 @@ def load_posts():
                 raise SystemExit(f"{fn}: frontmatter에 {k} 없음")
         slug = meta.get("slug") or re.sub(r"^\d{4}-\d{2}-\d{2}-", "", fn[:-3])
         html_body = markdown.markdown(body_md, extensions=["extra", "sane_lists"])
+        html_body = re.sub(r"\*\*(.+?)\*\*", r"<strong></strong>", html_body)  # HTML 블록 안에 남은 마크다운 강조
         text = re.sub(r"<[^>]+>", "", html_body)
         chars = len(re.sub(r"\s", "", text))
         posts.append(dict(meta, slug=slug, file=f"blog-{slug}.html", body=html_body, chars=chars,
@@ -878,6 +879,45 @@ def post_card(p):
   <img src="assets/img/{p['cover']}" alt="" loading="lazy">
   <div class="body"><div class="meta"><span class="cat">{p['category']}</span><time datetime="{p['date']}">{p['date']}</time> · {p['minutes']}분</div>
   <h3>{p['title']}</h3><p>{p['description']}</p></div></a>"""
+
+def structure_body(html, cta_href):
+    """생성/작성된 본문 HTML을 참고 구조(한눈에 보기 → 섹션 카드 → 중간 CTA → FAQ 박스)로 재구성."""
+    parts = re.split(r"<h2[^>]*>(.*?)</h2>", html, flags=re.S)
+    intro, secs = parts[0], []
+    for i in range(1, len(parts), 2):
+        secs.append((re.sub(r"<[^>]+>", "", parts[i]).strip(), parts[i + 1].strip()))
+    # 서론의 '먼저 결론부터' 인용문 → 요약 박스 상단 문장으로
+    conclusion = ""
+    m = re.search(r"<blockquote>(.*?)</blockquote>", intro, re.S)
+    if m:
+        conclusion = re.sub(r"</?p>", "", m.group(1)).strip()
+        intro = intro.replace(m.group(0), "")
+    # FAQ 섹션 분리
+    body_secs = [(h, c) for h, c in secs if not ("자주 묻는" in h or "FAQ" in h.upper())]
+    faq_secs = [(h, c) for h, c in secs if ("자주 묻는" in h or "FAQ" in h.upper())]
+    clean = lambda h: re.sub(r"^\s*\d+[.)]\s*", "", h)
+    # 한눈에 보기
+    items = "".join(f"<li>{clean(h)}</li>" for h, _ in body_secs)
+    items += f'<li>우리 아이에게 맞는지는 <a href="{cta_href}">무료 상담</a>으로 먼저 확인해보실 수 있어요.</li>'
+    summary = '<div class="summary-box"><strong>이 글 한눈에 보기</strong>' + (f"<p>{conclusion}</p>" if conclusion else "") + f"<ul>{items}</ul></div>"
+    # 섹션 카드 + 중간 CTA
+    mid = '<div class="mid-cta"><span>우리 아이에게 맞는 공부 방식이 궁금하시다면<br>가까운 센터 상담으로 먼저 확인해보세요.</span>' + f'<a href="{cta_href}">무료 상담 신청하기 →</a></div>'
+    mid_at = 3 if len(body_secs) >= 5 else 2
+    out = [summary, intro]
+    for i, (h, c) in enumerate(body_secs, 1):
+        c = re.sub(r"<blockquote>\s*(?:<p>)?(.*?)(?:</p>)?\s*</blockquote>", r'<div class="callout"><b>핵심 정리</b>\1</div>', c, flags=re.S)
+        out.append(f'<div class="pbox"><h2>{h}</h2>{c}</div>')
+        if i == mid_at:
+            out.append(mid)
+    # FAQ
+    faqs = []
+    for _, c in faq_secs:
+        faqs += re.findall(r"<h3[^>]*>\s*Q\.?\s*(.*?)</h3>\s*<p>(.*?)</p>", c, re.S)
+        faqs += re.findall(r"<p><strong>\s*Q\.?\s*(.*?)</strong>\s*(.*?)</p>", c, re.S)
+    if faqs:
+        out.append('<div class="pbox faq-box"><h2>자주 묻는 질문</h2><div class="faq-list">' +
+                   "".join(f'<div class="faq"><h3>{q.strip()}</h3><p>{a.strip()}</p></div>' for q, a in faqs) + "</div></div>")
+    return "\n".join(out)
 
 def render_post(p, all_posts):
     url = f"{SITE_URL}/{p['file']}"
@@ -910,37 +950,35 @@ def render_post(p, all_posts):
             center_box = '<div class="center-box"><h3>📍 ' + f"{c['name']} 한눈에 보기" + '</h3><table>' + "".join(
                 f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in rows if v) + \
                 f'</table><p class="note">운영 과목·시간은 센터 사정에 따라 바뀔 수 있어 상담 시 확인해 드립니다. <a href="centers.html?q={c["name"].split("(")[0]}">센터 찾기에서 보기</a> · <a href="apply.html?center={c["name"]}">이 센터 상담 신청</a></p></div>'
-    related = [q for q in all_posts if q["slug"] != p["slug"]][:3]
+    others = [q for q in all_posts if q["slug"] != p["slug"]]
+    related = ([q for q in others if p.get("center") and q.get("center") == p["center"]] +
+               [q for q in others if q["category"] == p["category"]] + others)
+    seen, uniq = set(), []
+    for q in related:
+        if q["slug"] not in seen:
+            seen.add(q["slug"]); uniq.append(q)
+    related = uniq[:3]
     rel = ""
     if related:
-        rel = '<section class="section alt"><div class="wrap"><h2 style="margin-bottom:24px">함께 읽을 글</h2><div class="grid grid-3">' + "".join(post_card(q) for q in related) + '</div></div></section>'
+        rel = '<div class="related"><b>함께 보면 좋은 글</b><ul>' + "".join(f'<li><a href="{q["file"]}">{q["title"]}</a></li>' for q in related) + "</ul></div>"
+    cta_href = f"apply.html?center={p['center']}" if p.get("center") else "apply.html"
+    structured = structure_body(p["body"], cta_href)
     body = f"""
-<section class="page-hero"><div class="wrap">
-  <div class="crumb"><a href="index.html">홈</a> › <a href="blog.html">학습 칼럼</a> › {p['category']}</div>
+<section class="post-hero"><div class="wrap">
+  <nav class="breadcrumb"><a href="index.html">홈</a> / <a href="blog.html">학습 칼럼</a> / {p['category']}</nav>
+  <span class="eyebrow"><time datetime="{p['date']}">{p['date'].replace('-', '. ')}</time> · {p['category']} · 읽는 시간 약 {p['minutes']}분</span>
   <h1>{p['title']}</h1>
-  <p class="lead">{p['description']}</p>
-  <div class="post-meta"><time datetime="{p['date']}">{p['date']}</time> · 읽는 시간 약 {p['minutes']}분 · {p['category']}</div>
+  <p>{p['description']}</p>
 </div></section>
 <section class="section"><div class="wrap">
-  <div class="post-layout">
-    <article class="prose">
-      <img class="post-cover" src="assets/img/{p['cover']}" alt="{p['title']}" loading="lazy">
-      {p['body']}
-      {center_box}
-      <div class="post-cta">
-        <h3>우리 아이에게 맞는 방법인지 확인하고 싶다면</h3>
-        <p>학년·학교·현재 상황을 알려주시면 가까운 와와학습코칭센터 기준으로 진단 일정과 진행 방식을 안내해 드립니다. 상담과 진단은 무료이고 등록을 권유하지 않습니다.</p>
-        <div class="btn-group"><a class="btn btn-primary" href="apply.html">무료 학습상담 신청</a><a class="btn btn-outline" href="tel:{PHONE_TEL}">📞 {PHONE}</a></div>
-      </div>
-      <p class="post-back"><a href="blog.html">← 학습 칼럼 목록으로</a></p>
-    </article>
-    <aside class="post-side">
-      <div class="card"><h3>이 글은</h3><p>와와학습코칭센터 학습상담 파트너가 쓴 공부법·내신 전략 칼럼입니다. 센터 운영 방식은 지점마다 다를 수 있습니다.</p></div>
-      <div class="card" style="margin-top:16px"><h3>바로가기</h3><ul><li><a href="system.html">학습 시스템</a></li><li><a href="subjects.html">과목 안내</a></li><li><a href="faq.html">자주 묻는 질문</a></li><li><a href="apply.html">무료 학습상담</a></li></ul></div>
-    </aside>
-  </div>
+  <article class="post-article prose">
+    <img class="post-cover" src="assets/img/{p['cover']}" alt="{p['title']}" loading="lazy">
+    {structured}
+    {center_box}
+    {rel}
+    <a class="back-list" href="blog.html">← 학습 칼럼 목록으로</a>
+  </article>
 </div></section>
-{rel}
 {cta_band()}
 """
     return head(p["title"] + " | 와와학습코칭센터 학습 칼럼", p["description"], p["file"], p["keywords"],
