@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://wawacenter.co.kr/</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://wawacenter.co.kr/about.html</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://wawacenter.co.kr/system.html</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://wawacenter.co.kr/ai-class.html</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://wawacenter.co.kr/subjects.html</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://wawacenter.co.kr/centers.html</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://wawacenter.co.kr/reviews.html</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://wawacenter.co.kr/faq.html</loc><lastmod>2026-11-01</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://wawacenter.co.kr/blog.html</loc><lastmod>2026-11-01</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wawacenter.co.kr/</loc><lastmod>2026-11-03</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://wawacenter.co.kr/about.html</loc><lastmod>2026-11-03</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wawacenter.co.kr/system.html</loc><lastmod>2026-11-03</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wawacenter.co.kr/ai-class.html</loc><lastmod>2026-11-03</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wawacenter.co.kr/subjects.html</loc><lastmod>2026-11-03</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wawacenter.co.kr/centers.html</loc><lastmod>2026-11-03</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wawacenter.co.kr/reviews.html</loc><lastmod>2026-11-03</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wawacenter.co.kr/faq.html</loc><lastmod>2026-11-03</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wawacenter.co.kr/blog.html</loc><lastmod>2026-11-03</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wawacenter.co.kr/blog-wolgyecho-suhak.html</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://wawacenter.co.kr/blog-soraecho-yeongeo.html</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://wawacenter.co.kr/blog-sololjung-yeongeo.html</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://wawacenter.co.kr/blog-simgokcho-gugeo.html</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://wawacenter.co.kr/blog-seongsancho-suhak.html</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://wawacenter.co.kr/blog-hamhyeoncho-suhak.html</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://wawacenter.co.kr/blog-gyeongbukyego-yeongeo.html</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://wawacenter.co.kr/blog-daejeonyongsancho-suhak.html</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://wawacenter.co.kr/blog-daegujeilgo-naesin.html</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://wawacenter.co.kr/blog-bumyeongjung-naesin.html</loc><lastmod>2026-11-03</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://wawacenter.co.kr/blog-wolbongcho-suhak.html</loc><lastmod>2026-11-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://wawacenter.co.kr/blog-sungmunjung-yeongeo.html</loc><lastmod>2026-11-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://wawacenter.co.kr/blog-seogangcho-yeongeo.html</loc><lastmod>2026-11-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>

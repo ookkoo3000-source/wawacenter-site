@@ -9,3 +9,13 @@
 강릉교동점	해람중	내신	2026-11-01	2026-11-01-haeramjung-naesin.md
 별내중앙점 (모두오름)	한별초	수학	2026-11-01	2026-11-01-hanbyeolcho-suhak.md
 마포점	숭문중	영어	2026-11-01	2026-11-01-sungmunjung-yeongeo.md
+첨단점	월계초	수학	2026-11-03	2026-11-03-wolgyecho-suhak.md
+논현점	소래초	영어	2026-11-03	2026-11-03-soraecho-yeongeo.md
+상동점	부명중	내신	2026-11-03	2026-11-03-bumyeongjung-naesin.md
+배곧점	함현초	수학	2026-11-03	2026-11-03-hamhyeoncho-suhak.md
+반월당점	경북예고	영어	2026-11-03	2026-11-03-gyeongbukyego-yeongeo.md
+신중동점	심곡초	국어	2026-11-03	2026-11-03-simgokcho-gugeo.md
+관평점	대전용산초	수학	2026-11-03	2026-11-03-daejeonyongsancho-suhak.md
+강릉교동점	솔올중	영어	2026-11-03	2026-11-03-sololjung-yeongeo.md
+대구역점	대구제일고	내신	2026-11-03	2026-11-03-daegujeilgo-naesin.md
+오산점	성산초	수학	2026-11-03	2026-11-03-seongsancho-suhak.md
