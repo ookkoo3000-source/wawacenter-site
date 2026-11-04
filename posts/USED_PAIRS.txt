@@ -19,3 +19,17 @@
 강릉교동점	솔올중	영어	2026-11-03	2026-11-03-sololjung-yeongeo.md
 대구역점	대구제일고	내신	2026-11-03	2026-11-03-daegujeilgo-naesin.md
 오산점	성산초	수학	2026-11-03	2026-11-03-seongsancho-suhak.md
+첨단점	봉산초	수학	2026-11-04	2026-11-04-bongsancho-suhak.md
+상동점	송내고	영어	2026-11-04	2026-11-04-songnaego-yeongeo.md
+배곧점	배곧중	내신	2026-11-04	2026-11-04-baegotjung-naesin.md
+첨단점	산월초	수학	2026-11-04	2026-11-04-sanwolcho-suhak.md
+신중동점	부천중앙초	수학	2026-11-04	2026-11-04-bucheonjungangcho-suhak.md
+신중동점	부천중앙초	수학	2026-11-04	2026-11-04-bucheonjungangcho-suhak.md
+관평점	두리중	영어	2026-11-04	2026-11-04-durijung-yeongeo.md
+관평점	두리중	영어	2026-11-04	2026-11-04-durijung-yeongeo.md
+강릉교동점	강릉제일고	내신	2026-11-04	2026-11-04-gangreungjeilgo-naesin.md
+강릉교동점	강릉제일고	내신	2026-11-04	2026-11-04-gangreungjeilgo-naesin.md
+오산점	운산초	수학	2026-11-04	2026-11-04-unsancho-suhak.md
+오산점	운산초	수학	2026-11-04	2026-11-04-unsancho-suhak.md
+마두점	호수초	국어	2026-11-04	2026-11-04-hosucho-gugeo.md
+당진중앙점	당진초	수학	2026-11-04	2026-11-04-dangjincho-suhak.md
