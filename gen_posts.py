@@ -73,6 +73,14 @@ def call_gemini(prompt):
                 log(f"  err {model}: {ex}"); time.sleep(3)
     return None, None
 
+def fix_faq(html):
+    """FAQ 헤딩 보정: <h3>자주 묻는 질문</h3> → <h2>, 헤딩 없이 <h3>Q.로 시작하면 <h2> 삽입 (build.py는 <h2>로만 FAQ를 구분)."""
+    html = re.sub(r"<h3[^>]*>\s*(자주 묻는 질문|FAQ)[^<]*</h3>", "<h2>자주 묻는 질문</h2>", html)
+    if not re.search(r"<h2[^>]*>[^<]*(자주 묻는|FAQ)", html):
+        m = re.search(r"<h3[^>]*>\s*Q\.", html)
+        if m: html = html[:m.start()] + "<h2>자주 묻는 질문</h2>\n" + html[m.start():]
+    return html
+
 def measure(html):
     """(섹션별 글자수 리스트, FAQ 개수, 서론 글자수)"""
     html = re.sub(r"^```\w*\s*|```\s*$", "", html.strip())
@@ -177,9 +185,9 @@ def main():
         for attempt in range(3):
             model, text = call_gemini(prompt)
             if not text: continue
-            text = re.sub(r"^```\w*\s*|```\s*$", "", text.strip())
+            text = fix_faq(re.sub(r"^```\w*\s*|```\s*$", "", text.strip()))
             secs, faq, intro = measure(text)
-            score = (min(len(secs), 6), faq >= 3, min(secs) if secs else 0)
+            score = (faq >= 3 and len(secs) == 6, faq >= 3, min(len(secs), 6), min(secs) if secs else 0)
             log(f"  try{attempt+1} {model}: h2={len(secs)} min={min(secs) if secs else 0} faq={faq} intro={intro}")
             if best is None or score > best[0]: best = (score, text, secs, faq)
             if len(secs) == 6 and faq >= 3 and min(secs) >= 600 and intro >= 250: break

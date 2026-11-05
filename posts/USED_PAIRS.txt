@@ -29,3 +29,13 @@
 오산점	운산초	수학	2026-11-04	2026-11-04-unsancho-suhak.md
 마두점	호수초	국어	2026-11-04	2026-11-04-hosucho-gugeo.md
 당진중앙점	당진초	수학	2026-11-04	2026-11-04-dangjincho-suhak.md
+첨단점	첨단초	수학	2026-11-05	2026-11-05-cheomdancho-suhak.md
+배곧점	배곧라라중	영어	2026-11-05	2026-11-05-baegotrarajung-yeongeo.md
+신중동점	부곡중	내신	2026-11-05	2026-11-05-bugokjung-naesin.md
+둔산점 (더블유플러스)	삼천초	수학	2026-11-05	2026-11-05-samcheoncho-suhak.md
+마두점	금계초	영어	2026-11-05	2026-11-05-geumgyecho-yeongeo.md
+당진중앙점	호서고	내신	2026-11-05	2026-11-05-hoseogo-naesin.md
+칠곡점	대구북부초	수학	2026-11-05	2026-11-05-daegubukbucho-suhak.md
+비산점	샘모루초	영어	2026-11-05	2026-11-05-saemmorucho-yeongeo.md
+첨단점	천곡중	수학	2026-11-05	2026-11-05-cheongokjung-suhak.md
+신중동점	부천중	영어	2026-11-05	2026-11-05-bucheonjung-yeongeo.md
