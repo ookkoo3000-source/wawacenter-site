@@ -39,3 +39,13 @@
 비산점	샘모루초	영어	2026-11-05	2026-11-05-saemmorucho-yeongeo.md
 첨단점	천곡중	수학	2026-11-05	2026-11-05-cheongokjung-suhak.md
 신중동점	부천중	영어	2026-11-05	2026-11-05-bucheonjung-yeongeo.md
+첨단점	신용중	수학	2026-11-06	2026-11-06-sinyongjung-suhak.md
+둔산점 (더블유플러스)	둔산초	영어	2026-11-06	2026-11-06-dunsancho-yeongeo.md
+칠곡점	대천초	국어	2026-11-06	2026-11-06-daecheoncho-gugeo.md
+후평점	동춘천초	수학	2026-11-06	2026-11-06-dongchuncheoncho-suhak.md
+미사점	강동중	내신	2026-11-06	2026-11-06-gangdongjung-naesin.md
+돈암점	매원초	수학	2026-11-06	2026-11-06-maewoncho-suhak.md
+미금점	늘푸른초	영어	2026-11-06	2026-11-06-neulpureuncho-yeongeo.md
+신방화점	송정초	수학	2026-11-06	2026-11-06-songjeongcho-suhak.md
+첨단점	비아고	수학	2026-11-06	2026-11-06-biago-suhak.md
+둔산점 (더블유플러스)	서원초	영어	2026-11-06	2026-11-06-seowoncho-yeongeo.md
