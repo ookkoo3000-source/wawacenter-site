@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""와와학습코칭센터 학습상담 안내 사이트 빌드 스크립트.
+"""와와학습코칭센터 상담센터 안내 사이트 빌드 스크립트.
 python build.py → index / about / system / ai-class / subjects / reviews / faq / apply + sitemap/robots
 도메인 확정 시 SITE_URL 한 줄만 수정. 이미지는 assets/img/ (IMAGE_PROMPTS.md 참고)."""
 import io, os, json, re, datetime
 
 SITE_URL = "https://wawacenter.co.kr"
-SITE_NAME = "와와학습코칭센터 학습상담"
+SITE_NAME = "와와학습코칭센터 상담센터"
 PHONE = "010-3131-5305"
 PHONE_TEL = "+821031315305"
 EMAIL = "ookkoo12@naver.com"
@@ -62,9 +62,10 @@ def head(title, desc, path, keywords, noindex=False, extra_ld="", og="og.jpg"):
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
 {verify_tags}
-<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192x192.png">
-<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png?v=2">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192x192.png?v=2">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="assets/style.css?v={ASSET_V}">
@@ -82,7 +83,7 @@ def chrome_top(current):
 </div></div>
 <header class="header">
   <div class="wrap">
-    <a class="logo" href="index.html" aria-label="와와학습코칭센터 학습상담 홈"><span class="logo-mark">W</span><span class="logo-text">와와학습코칭센터<small>학습상담 안내</small></span></a>
+    <a class="logo" href="index.html" aria-label="와와학습코칭센터 상담센터 홈"><span class="logo-mark">W</span><span class="logo-text">와와학습코칭센터<small>상담센터</small></span></a>
     <nav class="nav" aria-label="주 메뉴">{links}<a class="cta" href="apply.html">무료 학습상담</a></nav>
     <button class="burger" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mnav"><span></span></button>
   </div>
@@ -109,7 +110,7 @@ def chrome_bottom():
 <footer class="footer">
   <div class="wrap">
     <div>
-      <h4>와와학습코칭센터 학습상담</h4>
+      <h4>와와학습코칭센터 상담센터</h4>
       <p>초등·중등·고등 자기주도학습 코칭 브랜드 와와학습코칭센터의 수강 상담과 학습 진단 신청을 돕는 안내 페이지입니다. 수강 상담 파트너가 운영하며, 와와학습코칭센터 브랜드와 프로그램의 권리는 (주)동화세상에듀코에 있습니다.</p>
       <p>상담 전화 <a href="tel:{PHONE_TEL}"><b style="color:#fff">{PHONE}</b></a> (평일 10:00–19:00) · 이메일 <a href="mailto:{EMAIL}">{EMAIL}</a></p>
     </div>
@@ -137,7 +138,7 @@ def chrome_bottom():
       </ul>
     </div>
     <div class="legal">
-      본 사이트는 와와학습코칭센터 수강 상담 안내를 위한 파트너 페이지이며 본사 공식 홈페이지가 아닙니다. 교습비·시간표·운영 과목은 센터마다 다르므로 상담 시 해당 센터 기준으로 안내합니다. 사례·후기의 학습 효과는 학생마다 다를 수 있습니다. ⓒ 와와학습코칭센터 학습상담 · 브랜드 자산 ⓒ (주)동화세상에듀코
+      본 사이트는 와와학습코칭센터 수강 상담 안내를 위한 파트너 페이지이며 본사 공식 홈페이지가 아닙니다. 교습비·시간표·운영 과목은 센터마다 다르므로 상담 시 해당 센터 기준으로 안내합니다. 사례·후기의 학습 효과는 학생마다 다를 수 있습니다. ⓒ 와와학습코칭센터 상담센터 · 브랜드 자산 ⓒ (주)동화세상에듀코
     </div>
   </div>
 </footer>
@@ -302,7 +303,7 @@ def naesin_html():
 pages = {}
 
 pages["index.html"] = dict(
-    title="와와학습코칭센터 학습상담 | 초중고 자기주도학습 코칭·국영수 내신 전문, 전국 205개 센터",
+    title="와와학습코칭센터 상담센터 | 초중고 자기주도학습 코칭",
     desc="학원을 바꿔도 성적이 제자리라면 공부 방법부터 봐야 합니다. 와와학습코칭센터는 둥지학습·플래너 관리·4C 진단·무학년 수업으로 초등·중등·고등 학생의 자기주도학습을 만듭니다. 전국 205개 센터, 2025 소비자가 뽑은 올해의 브랜드대상. 무료 학습상담 신청.",
     keywords="와와학습코칭센터, 와와코칭, 학습코칭센터, 자기주도학습 학원, 초등학원, 중등학원, 고등학원, 국영수 학원, 내신 대비 학원, 플래너 학습관리, 둥지학습, 메타인지 학습, 무학년 수업, 4C 프로세스, 공부습관 학원, 오답노트, 수행평가 대비, 무료 학습상담",
     body=lambda: f"""
@@ -761,7 +762,7 @@ pages["faq.html"] = dict(
 """)
 
 pages["apply.html"] = dict(
-    title="무료 학습상담 신청 | 와와학습코칭센터 학습상담",
+    title="무료 학습상담 신청 | 와와학습코칭센터 상담센터",
     desc="와와학습코칭센터 무료 학습상담 신청. 학부모 성함, 자녀 학년, 연락처, 지역을 남겨 주시면 가까운 센터의 진단 일정을 안내해 드립니다.",
     keywords="와와학습코칭센터 상담신청, 무료 학습상담, 학습진단 신청, 학원 상담 예약",
     noindex=True,
@@ -771,7 +772,7 @@ pages["apply.html"] = dict(
   <div class="wrap">
     <div class="grid grid-2" style="grid-template-columns:1.3fr .8fr;align-items:start">
       <form class="form" id="applyForm" action="https://formsubmit.co/ajax/{EMAIL}" method="POST">
-        <input type="hidden" name="_subject" value="[와와학습코칭센터 학습상담] 무료 학습상담 신청">
+        <input type="hidden" name="_subject" value="[와와학습코칭센터 상담센터] 무료 학습상담 신청">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
@@ -990,7 +991,7 @@ def render_blog_index(posts):
     chips = "".join(f'<a href="#" data-cat="{c}">{c}</a>' for c in cats)
     grid = "".join(post_card(p) for p in posts) if posts else '<p class="note">첫 글을 준비 중입니다.</p>'
     body = f"""
-{page_hero("학습 칼럼", "학습 칼럼", "공부 습관, 플래너, 내신 전략, 과목별 공부법을 학부모와 학생이 바로 써먹을 수 있게 정리합니다. 와와학습코칭센터 학습상담 파트너가 꾸준히 발행합니다.")}
+{page_hero("학습 칼럼", "학습 칼럼", "공부 습관, 플래너, 내신 전략, 과목별 공부법을 학부모와 학생이 바로 써먹을 수 있게 정리합니다. 와와학습코칭센터 상담센터 파트너가 꾸준히 발행합니다.")}
 <section class="section"><div class="wrap">
   <div class="faq-cats" id="catFilter"><a href="#" data-cat="" aria-current="true">전체 ({len(posts)})</a>{chips}</div>
   <div class="grid grid-3" id="postGrid">{grid}</div>
@@ -998,7 +999,7 @@ def render_blog_index(posts):
 {cta_band()}
 """
     return head("와와학습코칭센터 학습 칼럼 | 공부습관·플래너·내신 전략·과목별 공부법",
-                "초중고 학부모를 위한 공부법 칼럼. 자기주도학습 습관, 플래너 활용, 내신 4주 전략, 오답노트, 과목별 공부법을 와와학습코칭센터 학습상담 파트너가 꾸준히 발행합니다.",
+                "초중고 학부모를 위한 공부법 칼럼. 자기주도학습 습관, 플래너 활용, 내신 4주 전략, 오답노트, 과목별 공부법을 와와학습코칭센터 상담센터 파트너가 꾸준히 발행합니다.",
                 "blog.html", "공부법 칼럼, 자기주도학습 방법, 플래너 쓰는 법, 내신 공부 전략, 오답노트 쓰는 법, 중학생 공부법, 고등학생 내신, 초등 공부습관, 와와학습코칭센터 칼럼") \
         + chrome_top("blog.html") + body + chrome_bottom()
 
